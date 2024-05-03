@@ -37,7 +37,7 @@ def create_news(news_model, category_model, user_model):
             content=new["content"],
             author=user_model.objects.get(name=new["author"]),
             created_at=new["created_at"],
-            img=new["image"],
+            image=new["image"],
         )
         category = category_model.objects.get(name=new["category"])
         n.categories.add(category)

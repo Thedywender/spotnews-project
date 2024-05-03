@@ -32,7 +32,7 @@ class News(models.Model):
     content = models.TextField(blank=False, null=False)
     author = models.ForeignKey("User", on_delete=models.CASCADE)
     created_at = models.DateField(blank=False, null=False)
-    img = models.ImageField(upload_to="img/", blank=True, null=True)
+    image = models.ImageField(upload_to="img/", blank=True, null=True)
     categories = models.ManyToManyField(
         Category, related_name="news", blank=False
     )

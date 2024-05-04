@@ -1,0 +1,19 @@
+<!-- {% extends 'base.html' %}
+
+{% block title %}
+Página de Detalhes da Notícia
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="name">Nome</label>
+    <input type="text" name="name" maxlength="200" required>
+    <button type="submit">Salvar</button>
+</form>
+        <h2 class="news-title">{{ new.title }}</h2>
+        <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
+        <img src="{% static new.image.url %}" alt="{{ new.title }}">
+        <p>{{ new.content }}</p>
+{% endblock %} -->

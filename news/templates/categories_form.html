@@ -1,19 +1,18 @@
-<!-- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
-Página de Detalhes da Notícia
+    Formulário para Nova Categoria
+{% endblock %}
+
+{% block header_links %}
+    <li><a href="{% url 'categories-form' %}">Cadastrar Categorias</a></li>
 {% endblock %}
 
 {% block content %}
-
-<form action="" method="post">
+<form method="post" action="{% url 'categories-form' %}">
     {% csrf_token %}
-    <label for="name">Nome</label>
+    <label for="id_name">Nome</label>
     <input type="text" name="name" maxlength="200" required>
     <button type="submit">Salvar</button>
 </form>
-        <h2 class="news-title">{{ new.title }}</h2>
-        <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
-        <img src="{% static new.image.url %}" alt="{{ new.title }}">
-        <p>{{ new.content }}</p>
-{% endblock %} -->
+{% endblock %}

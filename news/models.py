@@ -22,7 +22,7 @@ class User(models.Model):
 def validate_title(value):
     words = value.split()
     if len(words) <= 1:
-        raise ValidationError("O título deve ter mais de uma palavra.")
+        raise ValidationError("O título deve conter pelo menos 2 palavras.")
 
 
 class News(models.Model):

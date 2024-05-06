@@ -3,7 +3,7 @@ from news.models import News, Category, User
 from news.forms import CategoryForm, NewsForm
 from rest_framework import viewsets
 
-from news.serializers import CategorySerializer
+from news.serializers import CategorySerializer, UserSerializer
 
 
 def home(request):
@@ -48,3 +48,8 @@ def create_news_form(request):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

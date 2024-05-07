@@ -6,34 +6,36 @@
 {% endblock %}
 
 {% block header_links %}
+<li><a href="{% url 'home-page' %}">Home</a></li>
     <li><a href="{% url 'categories-form' %}">Cadastrar Categorias</a></li>
-    <li><a href="{% url 'news-form' %}">Cadastrar Notícias</a></li>
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{% url 'news-form' %}" enctype="multipart/form-data">
+    <form class="news-form" method="post" action="{% url 'news-form' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form_news.as_p }}
-        <label for="id_title">Título</label>
-        <input type="text" name="title" maxlength="200" required>
-        <label for="id_content">Conteúdo</label>
-        <textarea name="content" required></textarea>
-        <label for="id_author">Autoria</label>
-        <select name="author">
-            {% for user in users %}
-                <option value="{{ user.id }}">{{ user.name }}</option>
-            {% endfor %}
-        </select>
-        <label for="id_created_at">Criado em</label>
-        <input type="date" name="created_at" required>
-        <label for="id_image">URL da Imagem</label>
-        <input type="file" name="image">
-        {% for category in categories %}
-            <label for="id_categories_{{ category.id }}">{{ category.name }}</label>
-            <input type="checkbox" name="categories" id="id_categories_{{ category.id }}", value="{{ category.id }}">
+        {% for field in form_news %}
+            <div class="form-field">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="help">{{ field.help_text }}</small>
+                {% endif %}
+                
+                {% for error in field.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
         {% endfor %}
-        <button type="submit">Salvar</button>
-
-
+        <div id="id_categories">
+            {% for checkbox in form.categories.field.widget.choices %}
+                <div class="checkbox-wrapper">
+                    <label for="{{ checkbox.id_for_label }}">
+                        {{ checkbox.choice_label }}
+                        <input type="checkbox" name="{{ form.categories.html_name }}" id="{{ checkbox.id_for_label }}" value="{{ checkbox.choice_value }}">
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="button" type="submit">Salvar</button>
     </form>
 {% endblock %}

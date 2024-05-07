@@ -22,13 +22,14 @@ def news_details(request, id):
 
 def categories_form(request):
     if request.method == "POST":
-        category = CategoryForm(request.POST)
-        if category.is_valid():
-            Category.objects.create(**category.cleaned_data)
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect("home-page")
     else:
-        category = CategoryForm()
-    return render(request, "categories_form.html", {"form": category})
+        form = CategoryForm()
+
+    return render(request, "categories_form.html", {"form_category": form})
 
 
 def create_news_form(request):

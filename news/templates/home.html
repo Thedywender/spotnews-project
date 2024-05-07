@@ -5,13 +5,22 @@
     Página Inicial
 {% endblock %}
 
+{% block header_links %}
+    <li><a href="{% url 'categories-form' %}">Cadastrar Categorias</a></li>
+    <li><a href="{% url 'news-form' %}">Cadastrar Notícias</a></li>
+{% endblock %}
+
 {% block content %}
    
-    <main>
+    <main class="news-container">
         {% for new in news %}
-            <h2 class="news-title">{{ new.title }}</h2>
-            <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
-            <img src="{% static new.image.url %}" alt="{{ new.title }}">
-        {% endfor %}
+        <div class="news-card">
+        <a href="{% url 'news-details-page'  new.id %}">
+                <h2 class="news-title">{{ new.title }}</h2>
+                <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
+                <img class="news-image" src="{% static new.image.url %}" alt="{{ new.title }}">
+            </a>
+        </div>
+            {% endfor %}
     </main>
 {% endblock %}

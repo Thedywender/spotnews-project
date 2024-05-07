@@ -5,14 +5,24 @@
     Página de Detalhes da Notícia
 {% endblock %}
 
+{% block header_links %}
+    <li><a href="{% url 'categories-form' %}">Cadastrar Categorias</a></li>
+    <li><a href="{% url 'news-form' %}">Cadastrar Notícias</a></li>
+{% endblock %}
+
 {% block content %}
+<main class="news-container">
+<div class="news-detail">
+    <img class="news-detail img" src="{% static news_details.image.url %}" alt="{{ news_details.title }}">
     <h1 class="news-title">{{ news_details.title }}</h1>
         <p class="news-content">{{ news_details.content }}</p>
-            Categories:
             {% for category in news_details.categories.all %}
                 <span class="news-categories">{{ category.name }}</span>
             {% endfor %}
+    <div class="news-bottom">
         <span class="news-author">{{ news_details.author }}</span>
         <span class="news-date">{{ news_details.created_at|date:"d/m/Y" }}</span>
-        <img src="{% static news_details.image.url %}" alt="{{ news_details.title }}">
+    </div>
+</div>
+</main>
 {% endblock %}
